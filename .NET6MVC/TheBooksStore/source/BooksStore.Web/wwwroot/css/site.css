@@ -1,18 +1,26 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+
+img {
+    top: 0;
+    left: 0;
+    width: 50px !important;
+    height: 50Px !important;
+    box-shadow: 3px 3px 3px rgb(5, 43, 126) !important;
 }

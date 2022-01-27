@@ -9,6 +9,7 @@ namespace BooksStore.Web.Data
 
         public BookStoreDbContext(DbContextOptions<BookStoreDbContext> options) : base(options)
         {
+            BookStoreDbContextSeed.SeedDatabase(this);
         }
 
         public DbSet<Book>? Books { get; set; }

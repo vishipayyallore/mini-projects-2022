@@ -14,7 +14,7 @@ namespace BooksStore.Web.Core.Entities
 
         public string Description { get; set; } = string.Empty;
 
-        public string Thumbnail { get; set; } = string.Empty;
+        public string PictureUrl { get; set; } = string.Empty;
 
         public decimal Price { get; set; } = 0.0m;
     }
