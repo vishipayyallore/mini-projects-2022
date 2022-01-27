@@ -5,9 +5,9 @@ namespace BooksStore.Web.Reposotory
 
     public interface IBookRepository
     {
-        Task<IEnumerable<Book?>> GetAll();
+        Task<IEnumerable<Book?>> GetAllBooks();
 
-        Task<Book?> GetById(Guid courseId);
+        Task<Book?> GetBookById(Guid courseId);
     }
 
 }

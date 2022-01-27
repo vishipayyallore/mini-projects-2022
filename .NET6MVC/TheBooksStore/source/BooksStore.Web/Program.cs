@@ -1,6 +1,14 @@
+using BooksStore.Web.Data;
+using BooksStore.Web.Reposotory;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddTransient<IBookRepository, BookRepository>();
+
+builder.Services.AddDbContext<BookStoreDbContext>(opt => opt.UseInMemoryDatabase(new Guid().ToString()));
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
