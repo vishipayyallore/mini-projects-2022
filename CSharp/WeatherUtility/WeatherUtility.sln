@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentation", "{0C70B2C5-63AB-4B82-B322-471D82C3C4C5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "source", "source", "{AF21D81E-F7FD-4171-9FB5-CD5475CDF26E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{56E39AF6-E8BE-4FC2-A278-9F375E4D2E22}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8F4149D8-6843-4050-B66E-00BEA43B0AA0}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{4EC31953-8EED-467D-AC88-77CA2C2881CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeaderFooter.Lib", "source\common\HeaderFooter.Lib\HeaderFooter.Lib.csproj", "{413CF791-AF8D-4BD2-A84F-2E4A4BDC9DDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherUtility.Core", "source\WeatherUtility.Core\WeatherUtility.Core.csproj", "{C4058342-4C45-4826-9090-5EFCE97716B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{413CF791-AF8D-4BD2-A84F-2E4A4BDC9DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{413CF791-AF8D-4BD2-A84F-2E4A4BDC9DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{413CF791-AF8D-4BD2-A84F-2E4A4BDC9DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{413CF791-AF8D-4BD2-A84F-2E4A4BDC9DDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4058342-4C45-4826-9090-5EFCE97716B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4058342-4C45-4826-9090-5EFCE97716B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4058342-4C45-4826-9090-5EFCE97716B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4058342-4C45-4826-9090-5EFCE97716B6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4EC31953-8EED-467D-AC88-77CA2C2881CF} = {AF21D81E-F7FD-4171-9FB5-CD5475CDF26E}
+		{413CF791-AF8D-4BD2-A84F-2E4A4BDC9DDC} = {4EC31953-8EED-467D-AC88-77CA2C2881CF}
+		{C4058342-4C45-4826-9090-5EFCE97716B6} = {AF21D81E-F7FD-4171-9FB5-CD5475CDF26E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C46FA4C7-2819-4837-999D-890AE49E7D59}
+	EndGlobalSection
+EndGlobal
