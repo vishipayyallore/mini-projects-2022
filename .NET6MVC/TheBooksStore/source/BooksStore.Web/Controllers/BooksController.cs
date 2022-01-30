@@ -16,6 +16,8 @@ namespace BooksStore.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
+            await Task.Delay(500);
+
             var items = await _bookRepository.GetAllBooks();
 
             return View(items);

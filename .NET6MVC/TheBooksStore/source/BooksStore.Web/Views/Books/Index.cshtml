@@ -1,4 +1,6 @@
-﻿@model IEnumerable<BooksStore.Web.Core.Entities.Book>
+﻿@using BooksStore.Web.Core.Entities
+
+@model IEnumerable<Book>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,9 +8,6 @@
 
 <h1>Books List</h1>
 
-@*<p>
-    <a asp-action="Create">Create New</a>
-    </p>*@
 <table class="table table-striped shadow table-hover table-bordered border-primary">
     <thead>
         <tr class="text-primary text-center">
@@ -57,3 +56,13 @@
         }
     </tbody>
 </table>
+
+
+@*@if (@Model.Any())
+    {
+    <script>
+    $("body").removeClass("submit-progress-bg");
+    $(".submit-progress").addClass("hidden");
+    </script>
+    }
+*@
