@@ -20,6 +20,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeaderFooter.Lib", "source\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherUtility.Core", "source\WeatherUtility.Core\WeatherUtility.Core.csproj", "{C4058342-4C45-4826-9090-5EFCE97716B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherUtility.Lib", "source\WeatherUtility.Lib\WeatherUtility.Lib.csproj", "{D1EABA3C-0822-4E7A-A47B-380FD238E109}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherUtility.Run", "source\WeatherUtility.Run\WeatherUtility.Run.csproj", "{BC39B1F1-3885-47D4-B0D0-245975CDBC80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +38,14 @@ Global
 		{C4058342-4C45-4826-9090-5EFCE97716B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4058342-4C45-4826-9090-5EFCE97716B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4058342-4C45-4826-9090-5EFCE97716B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1EABA3C-0822-4E7A-A47B-380FD238E109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1EABA3C-0822-4E7A-A47B-380FD238E109}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1EABA3C-0822-4E7A-A47B-380FD238E109}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1EABA3C-0822-4E7A-A47B-380FD238E109}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC39B1F1-3885-47D4-B0D0-245975CDBC80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC39B1F1-3885-47D4-B0D0-245975CDBC80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC39B1F1-3885-47D4-B0D0-245975CDBC80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC39B1F1-3885-47D4-B0D0-245975CDBC80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -42,6 +54,8 @@ Global
 		{4EC31953-8EED-467D-AC88-77CA2C2881CF} = {AF21D81E-F7FD-4171-9FB5-CD5475CDF26E}
 		{413CF791-AF8D-4BD2-A84F-2E4A4BDC9DDC} = {4EC31953-8EED-467D-AC88-77CA2C2881CF}
 		{C4058342-4C45-4826-9090-5EFCE97716B6} = {AF21D81E-F7FD-4171-9FB5-CD5475CDF26E}
+		{D1EABA3C-0822-4E7A-A47B-380FD238E109} = {AF21D81E-F7FD-4171-9FB5-CD5475CDF26E}
+		{BC39B1F1-3885-47D4-B0D0-245975CDBC80} = {AF21D81E-F7FD-4171-9FB5-CD5475CDF26E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C46FA4C7-2819-4837-999D-890AE49E7D59}
