@@ -1,4 +1,4 @@
-﻿using BooksStore.Web.Core.Entities;
+﻿using BooksStore.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BooksStore.Web.Data

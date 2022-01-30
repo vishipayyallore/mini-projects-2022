@@ -1,4 +1,4 @@
-﻿using BooksStore.Web.Core.Entities;
+﻿using BooksStore.Core.Entities;
 
 namespace BooksStore.Web.ViewModels
 {
