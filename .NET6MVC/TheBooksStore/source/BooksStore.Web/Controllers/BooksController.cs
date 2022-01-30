@@ -22,6 +22,20 @@ namespace BooksStore.Web.Controllers
 
             return View(items);
         }
+
+        // GET: Books/Details/5
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var book = await _bookRepository.GetBookById(id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return View(book);
+        }
+
     }
 
 }
