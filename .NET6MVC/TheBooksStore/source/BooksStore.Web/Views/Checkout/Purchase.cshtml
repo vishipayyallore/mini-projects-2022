@@ -1,0 +1,27 @@
+﻿@using BooksStore.Core.ViewModels
+
+@model BookPurchaseVM
+
+@{
+    ViewData["Title"] = "Purchase";
+}
+
+<div class="wrapper p-2">
+    <div class="checkout container p-2 shadow">
+        <form id="payment-form" method="post" asp-controller="Checkout" asp-action="Create" class="p-2 shadow">
+            @Html.HiddenFor(n => n.Id)
+            <div class="card p-2">
+                <div class="card-body">
+                    <h5 class="card-title" name="Title" asp-for="@Model?.Title">@Model?.Title</h5>
+                    <p class="card-text">@Model?.Description</p>
+                    <p class="card-text"><small class="text-muted">Author: @Model?.Author</small></p>
+                    <p class="card-text"><small class="text-muted">Price: @Model?.Price</small></p>
+                </div>
+                <img style="width: 90%" class="card-img-bottom" src="@Model?.Picture" alt="Card image cap">
+            </div>
+            <hr />
+            <button class="btn btn-success" type="submit"><span>Confirm payment - $@Model?.Price</span></button>
+        </form>
+    </div>
+</div>
+

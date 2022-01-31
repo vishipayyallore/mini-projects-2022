@@ -46,6 +46,6 @@
 </div>
 <div class="shadow p-2">
     <a asp-action="Edit" class="btn btn-warning" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-success">Purchase $ @Model?.Price</a> |
+    <a asp-controller="Checkout" asp-action="Purchase" asp-route-id="@Model?.Id" class="btn btn-success">Purchase $ @Model?.Price</a> |
     <a asp-action="Index" class="btn btn-primary">Back to List</a>
 </div>
