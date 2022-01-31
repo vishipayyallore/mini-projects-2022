@@ -1,5 +1,6 @@
-using BooksStore.Web.Data;
-using BooksStore.Web.Reposotory;
+using BooksStore.Core.Interfaces;
+using BooksStore.Data;
+using BooksStore.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

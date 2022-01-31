@@ -1,4 +1,4 @@
-namespace BooksStore.Core.Entities
+namespace BooksStore.Core.ViewModels
 {
     public class ErrorViewModel
     {

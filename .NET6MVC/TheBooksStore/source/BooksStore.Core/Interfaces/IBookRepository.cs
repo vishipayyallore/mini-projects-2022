@@ -1,6 +1,6 @@
 ﻿using BooksStore.Core.Entities;
 
-namespace BooksStore.Web.Reposotory
+namespace BooksStore.Core.Interfaces
 {
 
     public interface IBookRepository

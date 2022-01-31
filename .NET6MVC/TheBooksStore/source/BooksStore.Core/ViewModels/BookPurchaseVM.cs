@@ -1,6 +1,6 @@
 ﻿using BooksStore.Core.Entities;
 
-namespace BooksStore.Web.ViewModels
+namespace BooksStore.Core.ViewModels
 {
     public class BookPurchaseVM : Book
     {

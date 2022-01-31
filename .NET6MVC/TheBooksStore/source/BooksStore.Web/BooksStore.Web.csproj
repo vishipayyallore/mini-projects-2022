@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BooksStore.Core\BooksStore.Core.csproj" />
+    <ProjectReference Include="..\BooksStore.Data\BooksStore.Data.csproj" />
+    <ProjectReference Include="..\BooksStore.Repository\BooksStore.Repository.csproj" />
   </ItemGroup>
 
 </Project>

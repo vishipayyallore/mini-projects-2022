@@ -1,4 +1,4 @@
-﻿using BooksStore.Web.Reposotory;
+﻿using BooksStore.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BooksStore.Web.Controllers

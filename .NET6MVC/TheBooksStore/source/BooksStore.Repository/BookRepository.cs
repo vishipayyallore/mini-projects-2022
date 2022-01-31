@@ -1,8 +1,9 @@
 ﻿using BooksStore.Core.Entities;
-using BooksStore.Web.Data;
+using BooksStore.Core.Interfaces;
+using BooksStore.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace BooksStore.Web.Reposotory
+namespace BooksStore.Repository
 {
 
     public class BookRepository : IBookRepository
