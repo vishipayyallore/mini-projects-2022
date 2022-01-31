@@ -30,7 +30,7 @@ namespace BooksStore.Data
                     Title="Book 1",
                     Description="Short Description.",
                     Author= "Author 1",
-                    PictureUrl = "/images/books/Book1.jpg",
+                    Picture = "/images/books/Book1.jpg",
                     Price = 19.90m
                 },
                 new Book()
@@ -39,7 +39,7 @@ namespace BooksStore.Data
                     Title="Book 2",
                     Description="Short Description.",
                     Author= "Author 2",
-                    PictureUrl = "/images/books/Book2.jpg",
+                    Picture = "/images/books/Book2.jpg",
                     Price = 29.90m
                 },
                 new Book()
@@ -48,7 +48,7 @@ namespace BooksStore.Data
                     Title="Book 3",
                     Description="Short Description.",
                     Author= "Author 3",
-                    PictureUrl = "/images/books/Book3.jpg",
+                    Picture = "/images/books/Book3.jpg",
                     Price = 32.49m
                 },
                 new Book()
@@ -57,7 +57,7 @@ namespace BooksStore.Data
                     Title="Book 4",
                     Description="Short Description.",
                     Author= "Author 4",
-                    PictureUrl = "/images/books/Book4.jpg",
+                    Picture = "/images/books/Book4.jpg",
                     Price = 17.89m
                 },
                 new Book()
@@ -66,7 +66,7 @@ namespace BooksStore.Data
                     Title="Book 5",
                     Description="Short Description.",
                     Author= "Author 5",
-                    PictureUrl = "/images/books/Book5.jpg",
+                    Picture = "/images/books/Book5.jpg",
                     Price = 32.00m
                 }
             };

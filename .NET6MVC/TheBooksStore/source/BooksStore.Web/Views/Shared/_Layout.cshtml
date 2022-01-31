@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Books Store</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BooksStore.Web.styles.css" asp-append-version="true" />
-    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
@@ -52,10 +52,11 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
-    <div class="submit-progress d-none">
-        @*<i class="fas fa-2x fa-spinner fa-spin" aria-hidden="true"></i>*@
-        <i class="fas fa-2x fa-spinner fa-spin" aria-hidden="true"></i>
-        <label>Please wait while we retrieve Data !!</label>
+    <div class="submit-progress d-none d-flex">
+        <span><i class="fa fa-spinner fa-spin fa-2x"></i></span>
+        <span>
+            <label>Please wait while we retrieve Data !!</label>
+        </span>
     </div>
 
 </body>

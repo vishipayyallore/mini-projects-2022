@@ -21,7 +21,7 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PictureUrl)
+                @Html.DisplayNameFor(model => model.Picture)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
@@ -43,7 +43,7 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td class="text-center">
-                    <img class="rounded-circle" src="@item.PictureUrl" title="@item.Title" />
+                    <img class="rounded-circle" src="@item.Picture" title="@item.Title" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
