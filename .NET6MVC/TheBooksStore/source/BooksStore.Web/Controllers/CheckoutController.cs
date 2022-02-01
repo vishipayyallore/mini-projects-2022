@@ -7,14 +7,20 @@ namespace BooksStore.Web.Controllers
     public class CheckoutController : Controller
     {
         private readonly IBookRepository _bookRepository;
+        private readonly ILogger<CheckoutController> _logger;
 
-        public CheckoutController(IBookRepository bookRepository)
+        public CheckoutController(IBookRepository bookRepository, ILogger<CheckoutController> logger)
         {
             _bookRepository = bookRepository ?? throw new ArgumentNullException(nameof(bookRepository));
+
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+
+            _logger.LogInformation($"CheckoutController() at {nameof(CheckoutController)}");
         }
 
         public async Task<IActionResult> Purchase(Guid id)
         {
+            _logger.LogInformation($"Starting Purchase() at {nameof(CheckoutController)}");
 
             var book = await _bookRepository.GetBookById(id);
 
