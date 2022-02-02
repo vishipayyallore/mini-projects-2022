@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+.NET6MVC/TheBooksStore/source/BooksStore.Web/Properties/ServiceDependencies/app-books-store-shared - Web Deploy/profile.arm.json
+.NET6MVC/TheBooksStore/source/BooksStore.Web/Properties/ServiceDependencies/app-books-store-basic - Web Deploy/profile.arm.json
