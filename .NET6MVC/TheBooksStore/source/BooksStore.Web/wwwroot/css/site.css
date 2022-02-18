@@ -20,9 +20,9 @@ body {
 img {
     top: 0;
     left: 0;
-    width: 50px !important;
+/*    width: 50px !important;
     height: 50Px !important;
-    box-shadow: 3px 3px 3px rgb(5, 43, 126) !important;
+*/    box-shadow: 3px 3px 3px rgb(5, 43, 126) !important;
 }
 
 .submit-progress-bg {
