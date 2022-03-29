@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 namespace HPlusSport.API.Data
 {
 
-    public class ShopContext : DbContext
+    public class ShopDbContext : DbContext
     {
-        public ShopContext(DbContextOptions<ShopContext> options) : base(options)
+        public ShopDbContext(DbContextOptions<ShopDbContext> options) : base(options)
         {
         }
 

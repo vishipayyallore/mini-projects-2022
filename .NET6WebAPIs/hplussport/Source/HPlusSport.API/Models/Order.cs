@@ -9,7 +9,7 @@ namespace HPlusSport.API.Models
 
         public DateTime OrderDate { get; set; }
 
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         [JsonIgnore]
         public virtual User? User { get; set; }

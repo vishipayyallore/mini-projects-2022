@@ -17,7 +17,7 @@ namespace HPlusSport.API.Models
 
         public bool IsAvailable { get; set; }
 
-        public int CategoryId { get; set; }
+        public Guid CategoryId { get; set; } = Guid.NewGuid();
 
         [JsonIgnore]
         public virtual Category? Category { get; set; }
