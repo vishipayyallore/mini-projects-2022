@@ -5,7 +5,7 @@ namespace HPlusSport.API.Models
 
     public class Product
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         public string Sku { get; set; } = string.Empty;
 
