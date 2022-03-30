@@ -1,5 +1,6 @@
 using HPlusSport.API.Common;
 using HPlusSport.API.Data;
+using HPlusSport.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,9 +25,16 @@ namespace HPlusSport.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProducts([FromQuery] QueryParameters queryParameters)
         {
+            List<Product> products = new();
+
             _logger.LogInformation($"Request received at {nameof(GetProducts)}");
 
-            var products = await _shopDbContext.Products
+            if (_shopDbContext.Products is null)
+            {
+                return Ok(products);
+            }
+
+            products = await _shopDbContext.Products
                                     .Skip(queryParameters.Size * (queryParameters.Page - 1))
                                     .Take(queryParameters.Size)
                                     .ToListAsync();
@@ -37,6 +45,11 @@ namespace HPlusSport.API.Controllers
         [HttpGet("{productId:Guid}")]
         public async Task<IActionResult> GetProductById(Guid productId)
         {
+            if (_shopDbContext.Products is null)
+            {
+                return NotFound();
+            }
+
             var product = await _shopDbContext.Products.FindAsync(productId);
 
             if (product == null)
