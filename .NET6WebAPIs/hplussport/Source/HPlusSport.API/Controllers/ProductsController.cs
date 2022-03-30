@@ -25,7 +25,22 @@ namespace HPlusSport.API.Controllers
         {
             _logger.LogInformation($"Request received at {nameof(GetProducts)}");
 
-            return Ok(await _shopDbContext.Products.ToListAsync());
+            var products = await _shopDbContext.Products.ToListAsync();
+         
+            return Ok(products);
+        }
+
+        [HttpGet("{productId:Guid}")]
+        public async Task<IActionResult> GetProductById(Guid productId)
+        {
+            var product = await _shopDbContext.Products.FindAsync(productId);
+
+            if(product == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(product);
         }
 
     }
