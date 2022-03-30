@@ -25,7 +25,7 @@ namespace HPlusSport.API.Controllers
         {
             _logger.LogInformation($"Request received at {nameof(GetProducts)}");
 
-            return Ok(await _shopDbContext.Products!.ToListAsync());
+            return Ok(await _shopDbContext.Products.ToListAsync());
         }
 
     }
