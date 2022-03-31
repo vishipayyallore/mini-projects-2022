@@ -19,6 +19,10 @@ namespace eRestaurant.Services.ProductAPI.Models
         public string CategoryName { get; set; } = string.Empty;
 
         public string ImageUrl { get; set; } = string.Empty;
+
+        public DateTime CreatedDateTime { get; set; }
+
+        public DateTime ModifiedDateTime { get; set; }
     }
 
 }
