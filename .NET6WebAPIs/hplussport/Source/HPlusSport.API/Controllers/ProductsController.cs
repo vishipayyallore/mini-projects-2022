@@ -23,23 +23,36 @@ namespace HPlusSport.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProducts([FromQuery] QueryParameters queryParameters)
+        public async Task<IActionResult> GetProducts([FromQuery] ProductQueryParameters queryParameters)
         {
-            List<Product> products = new();
-
             _logger.LogInformation($"Request received at {nameof(GetProducts)}");
 
             if (_shopDbContext.Products is null)
             {
-                return Ok(products);
+                return Ok(new List<Product>());
             }
 
-            products = await _shopDbContext.Products
-                                    .Skip(queryParameters.Size * (queryParameters.Page - 1))
-                                    .Take(queryParameters.Size)
-                                    .ToListAsync();
+            IQueryable<Product> products = _shopDbContext.Products;
 
-            return Ok(products);
+            if (queryParameters.MinPrice != null)
+            {
+                products = products.Where(p => p.Price >= queryParameters.MinPrice.Value);
+            }
+
+            if (queryParameters.MaxPrice != null)
+            {
+                products = products.Where(p => p.Price <= queryParameters.MaxPrice.Value);
+            }
+
+            if (!string.IsNullOrEmpty(queryParameters.Sku))
+            {
+                products = products.Where(p => p.Sku == queryParameters.Sku);
+            }
+
+            products = products.Skip(queryParameters.Size * (queryParameters.Page - 1))
+                               .Take(queryParameters.Size);
+
+            return Ok(await products.ToListAsync());
         }
 
         [HttpGet("{productId:Guid}")]
