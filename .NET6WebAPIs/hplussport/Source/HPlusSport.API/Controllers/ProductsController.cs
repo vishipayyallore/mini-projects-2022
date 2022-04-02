@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 namespace HPlusSport.API.Controllers
 {
 
+    /// <summary>
+    /// 
+    /// </summary>
     [ApiController]
     [Route("api/v1/[controller]")]
     public class ProductsController : ControllerBase
@@ -15,6 +18,12 @@ namespace HPlusSport.API.Controllers
         private readonly ILogger<ProductsController> _logger;
         private readonly ShopDbContext _shopDbContext;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="shopDbContext"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public ProductsController(ILogger<ProductsController> logger, ShopDbContext shopDbContext)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -22,6 +31,11 @@ namespace HPlusSport.API.Controllers
             _shopDbContext = shopDbContext ?? throw new ArgumentNullException(nameof(shopDbContext));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="queryParameters"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetProducts([FromQuery] ProductQueryParameters queryParameters)
         {
@@ -55,6 +69,11 @@ namespace HPlusSport.API.Controllers
             return Ok(await products.ToListAsync());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
         [HttpGet("{productId:Guid}")]
         public async Task<IActionResult> GetProductById(Guid productId)
         {
