@@ -8,7 +8,7 @@ namespace HPlusSport.API.Controllers
 {
 
     /// <summary>
-    /// 
+    /// Description: API for Products
     /// </summary>
     [ApiController]
     [Route("api/v1/[controller]")]
@@ -32,7 +32,7 @@ namespace HPlusSport.API.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Description: Retrieves all the Products
         /// </summary>
         /// <param name="queryParameters"></param>
         /// <returns></returns>
