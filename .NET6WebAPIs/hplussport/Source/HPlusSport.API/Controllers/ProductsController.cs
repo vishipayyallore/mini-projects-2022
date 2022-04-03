@@ -19,7 +19,7 @@ namespace HPlusSport.API.Controllers
         private readonly ShopDbContext _shopDbContext;
 
         /// <summary>
-        /// 
+        /// Description: Constructor with dependency injection
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="shopDbContext"></param>
@@ -70,7 +70,7 @@ namespace HPlusSport.API.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Description: Retrieves a Product for the given Id
         /// </summary>
         /// <param name="productId"></param>
         /// <returns></returns>
