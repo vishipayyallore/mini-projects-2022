@@ -8,7 +8,7 @@ namespace eRestaurant.Web.Services
     public class ProductService : BaseService, IProductsService
     {
         private readonly IHttpClientFactory _clientFactory;
-
+        
         public ProductService(IHttpClientFactory clientFactory) : base(clientFactory)
         {
             _clientFactory = clientFactory;
