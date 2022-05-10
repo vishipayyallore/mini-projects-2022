@@ -12,23 +12,25 @@ namespace eRestaurant.Web.Services
     {
         public ResponseDto ResponseModel { get; set; }
 
-        public IHttpClientFactory httpClient { get; set; }
+        public IHttpClientFactory HttpClient { get; set; }
 
         public BaseService(IHttpClientFactory httpClient)
         {
             this.ResponseModel = new ResponseDto();
-            this.httpClient = httpClient;
+            this.HttpClient = httpClient;
         }
 
         public async Task<T> SendAsync<T>(ApiRequest apiRequest)
         {
             try
             {
-                var client = httpClient.CreateClient("MangoAPI");
-                HttpRequestMessage message = new HttpRequestMessage();
+                var client = HttpClient.CreateClient("MangoAPI");
+                HttpRequestMessage message = new();
+
                 message.Headers.Add("Accept", "application/json");
                 message.RequestUri = new Uri(apiRequest.Url);
                 client.DefaultRequestHeaders.Clear();
+
                 if (apiRequest.Data != null)
                 {
                     message.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Data),

@@ -1,7 +1,11 @@
-﻿namespace eRestaurant.Web.Services
+﻿using eRestaurant.Web.Common;
+using eRestaurant.Web.Models;
+using eRestaurant.Web.Services.Interfaces;
+
+namespace eRestaurant.Web.Services
 {
 
-    public class ProductsService : BaseService, IProductService
+    public class ProductService : BaseService, IProductsService
     {
         private readonly IHttpClientFactory _clientFactory;
 
@@ -14,9 +18,9 @@
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
-                ApiType = SD.ApiType.POST,
+                ApiType = Constants.ApiType.POST,
                 Data = productDto,
-                Url = SD.ProductAPIBase + "/api/products",
+                Url = Constants.ProductAPIBase + "/api/products",
                 AccessToken = token
             });
         }
@@ -25,8 +29,8 @@
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
-                ApiType = SD.ApiType.DELETE,
-                Url = SD.ProductAPIBase + "/api/products/" + id,
+                ApiType = Constants.ApiType.DELETE,
+                Url = Constants.ProductAPIBase + "/api/products/" + id,
                 AccessToken = token
             });
         }
@@ -35,8 +39,8 @@
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
-                ApiType = SD.ApiType.GET,
-                Url = SD.ProductAPIBase + "/api/products",
+                ApiType = Constants.ApiType.GET,
+                Url = Constants.ProductAPIBase + "/api/products",
                 AccessToken = token
             });
         }
@@ -45,8 +49,8 @@
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
-                ApiType = SD.ApiType.GET,
-                Url = SD.ProductAPIBase + "/api/products/" + id,
+                ApiType = Constants.ApiType.GET,
+                Url = Constants.ProductAPIBase + "/api/products/" + id,
                 AccessToken = token
             });
         }
@@ -55,9 +59,9 @@
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
-                ApiType = SD.ApiType.PUT,
+                ApiType = Constants.ApiType.PUT,
                 Data = productDto,
-                Url = SD.ProductAPIBase + "/api/products",
+                Url = Constants.ProductAPIBase + "/api/products",
                 AccessToken = token
             });
         }
