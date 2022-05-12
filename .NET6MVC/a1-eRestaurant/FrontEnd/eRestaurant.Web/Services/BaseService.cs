@@ -12,19 +12,22 @@ namespace eRestaurant.Web.Services
     {
         public ResponseDto ResponseModel { get; set; }
 
-        public IHttpClientFactory HttpClient { get; set; }
+        private IHttpClientFactory HttpClient { get; set; }
 
         public BaseService(IHttpClientFactory httpClient)
         {
             this.ResponseModel = new ResponseDto();
+
             this.HttpClient = httpClient;
         }
 
         public async Task<T> SendAsync<T>(ApiRequest apiRequest)
         {
+            T? apiResponseDto = default;
+
             try
             {
-                var client = HttpClient.CreateClient("MangoAPI");
+                var client = HttpClient.CreateClient("ProductsAPI");
                 HttpRequestMessage message = new();
 
                 message.Headers.Add("Accept", "application/json");
@@ -42,7 +45,7 @@ namespace eRestaurant.Web.Services
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.AccessToken);
                 }
 
-                HttpResponseMessage apiResponse = null;
+                HttpResponseMessage? apiResponse = null;
                 switch (apiRequest.ApiType)
                 {
                     case Constants.ApiType.POST:
@@ -61,8 +64,8 @@ namespace eRestaurant.Web.Services
                 apiResponse = await client.SendAsync(message);
 
                 var apiContent = await apiResponse.Content.ReadAsStringAsync();
-                var apiResponseDto = JsonConvert.DeserializeObject<T>(apiContent);
-                return apiResponseDto;
+                apiResponseDto = JsonConvert.DeserializeObject<T>(apiContent);
+
 
             }
             catch (Exception e)
@@ -74,9 +77,10 @@ namespace eRestaurant.Web.Services
                     IsSuccess = false
                 };
                 var res = JsonConvert.SerializeObject(dto);
-                var apiResponseDto = JsonConvert.DeserializeObject<T>(res);
-                return apiResponseDto;
+                apiResponseDto = JsonConvert.DeserializeObject<T>(res);
             }
+
+            return apiResponseDto;
         }
 
         public void Dispose()
