@@ -8,6 +8,7 @@ namespace eRestaurant.Web.Services
     public class ProductService : BaseService, IProductsService
     {
         private readonly IHttpClientFactory _clientFactory;
+        private const string ApiEndPoint = "/api/v1/products";
 
         public ProductService(IHttpClientFactory clientFactory) : base(clientFactory)
         {
@@ -20,7 +21,7 @@ namespace eRestaurant.Web.Services
             {
                 ApiType = Constants.ApiType.POST,
                 Data = productDto,
-                Url = Constants.ProductAPIBase + "/api/products",
+                Url = $"{Constants.ProductAPIBase}{ApiEndPoint}",
                 AccessToken = token
             });
         }
@@ -30,7 +31,7 @@ namespace eRestaurant.Web.Services
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = Constants.ApiType.DELETE,
-                Url = Constants.ProductAPIBase + "/api/products/" + id,
+                Url = $"{Constants.ProductAPIBase}{ApiEndPoint}/{id}",
                 AccessToken = token
             });
         }
@@ -40,7 +41,7 @@ namespace eRestaurant.Web.Services
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = Constants.ApiType.GET,
-                Url = Constants.ProductAPIBase + "/api/products",
+                Url = $"{Constants.ProductAPIBase}{ApiEndPoint}",
                 AccessToken = token
             });
         }
@@ -50,7 +51,7 @@ namespace eRestaurant.Web.Services
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = Constants.ApiType.GET,
-                Url = Constants.ProductAPIBase + "/api/products/" + id,
+                Url = $"{Constants.ProductAPIBase}{ApiEndPoint}/{id}",
                 AccessToken = token
             });
         }
@@ -61,7 +62,7 @@ namespace eRestaurant.Web.Services
             {
                 ApiType = Constants.ApiType.PUT,
                 Data = productDto,
-                Url = Constants.ProductAPIBase + "/api/products",
+                Url = $"{Constants.ProductAPIBase}{ApiEndPoint}",
                 AccessToken = token
             });
         }
