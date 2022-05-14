@@ -8,17 +8,17 @@ namespace eRestaurant.Web.Controllers
     {
         public IActionResult PersonsIndex()
         {
-            IEnumerable<PersonModel> persons = GetDummyPersons();
+            IEnumerable<PersonDto> persons = GetDummyPersons();
 
             return View(persons);
         }
 
-        private static IEnumerable<PersonModel> GetDummyPersons()
+        private static IEnumerable<PersonDto> GetDummyPersons()
         {
-            return new List<PersonModel>
+            return new List<PersonDto>
             {
-                new PersonModel { PersonId = 1, Name = "Shiva", Gender = "Male", City = "Hyderabad" },
-                new PersonModel { PersonId = 2, Name = "Manish", Gender = "Male", City = "Jaipur" }
+                new PersonDto { PersonId = 1, Name = "Shiva", Gender = "Male", City = "Hyderabad" },
+                new PersonDto { PersonId = 2, Name = "Manish", Gender = "Male", City = "Jaipur" }
             };
         }
     }

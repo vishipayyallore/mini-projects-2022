@@ -1,6 +1,6 @@
 ﻿namespace eRestaurant.Web.Models
 {
-    public class PersonModel
+    public class PersonDto
     {
         public int PersonId { get; set; }
 
