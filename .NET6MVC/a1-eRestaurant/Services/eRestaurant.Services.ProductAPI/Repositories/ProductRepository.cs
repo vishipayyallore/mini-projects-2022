@@ -10,12 +10,12 @@ namespace eRestaurant.Services.ProductAPI.Repositories
     public class ProductRepository : IProductRepository
     {
 
-        private readonly ApplicationDbContext _db;
-        private IMapper _mapper;
+        private readonly ApplicationDbContext _applicationDbContext;
+        private readonly IMapper _mapper;
 
         public ProductRepository(ApplicationDbContext db, IMapper mapper)
         {
-            _db = db ?? throw new ArgumentNullException(nameof(db));
+            _applicationDbContext = db ?? throw new ArgumentNullException(nameof(db));
 
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
@@ -26,14 +26,14 @@ namespace eRestaurant.Services.ProductAPI.Repositories
 
             if (product.ProductId > 0)
             {
-                _db.Products.Update(product);
+                _applicationDbContext?.Products?.Update(product);
             }
             else
             {
-                _db.Products.Add(product);
+                _applicationDbContext?.Products?.Add(product);
             }
 
-            await _db.SaveChangesAsync();
+            await _applicationDbContext.SaveChangesAsync();
 
             return _mapper.Map<Product, ProductDto>(product);
         }
@@ -42,7 +42,7 @@ namespace eRestaurant.Services.ProductAPI.Repositories
         {
             try
             {
-                Product product = await _db.Products
+                Product product = await _applicationDbContext.Products
                                             .FirstOrDefaultAsync(u => u.ProductId == productId);
 
                 if (product == null)
@@ -50,9 +50,9 @@ namespace eRestaurant.Services.ProductAPI.Repositories
                     return false;
                 }
 
-                _db.Products.Remove(product);
+                _applicationDbContext.Products.Remove(product);
 
-                await _db.SaveChangesAsync();
+                await _applicationDbContext.SaveChangesAsync();
 
                 return true;
             }
@@ -65,7 +65,7 @@ namespace eRestaurant.Services.ProductAPI.Repositories
 
         public async Task<ProductDto> GetProductById(int productId)
         {
-            Product product = await _db.Products
+            Product product = await _applicationDbContext.Products
                                         .Where(x => x.ProductId == productId)
                                         .FirstOrDefaultAsync();
 
@@ -74,7 +74,7 @@ namespace eRestaurant.Services.ProductAPI.Repositories
 
         public async Task<IEnumerable<ProductDto>> GetProducts()
         {
-            List<Product> productList = await _db.Products.ToListAsync();
+            List<Product> productList = await _applicationDbContext.Products.ToListAsync();
 
             return _mapper.Map<List<ProductDto>>(productList);
 
