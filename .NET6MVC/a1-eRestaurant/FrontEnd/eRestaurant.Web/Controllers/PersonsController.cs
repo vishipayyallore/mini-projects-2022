@@ -6,11 +6,32 @@ namespace eRestaurant.Web.Controllers
 
     public class PersonsController : Controller
     {
+        static List<PersonDto> personList = new();
+
         public IActionResult PersonsIndex()
         {
-            IEnumerable<PersonDto> persons = GetDummyPersons();
 
-            return View(persons);
+            if (!personList.Any())
+            {
+                personList.AddRange(GetDummyPersons());
+            }
+
+            return View(personList);
+        }
+
+        [HttpGet]
+        public IActionResult PersonCreate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult PersonCreate(PersonDto personDto)
+        {
+            personList.Add(personDto);
+
+            return RedirectToAction(nameof(PersonsIndex));
         }
 
         private static IEnumerable<PersonDto> GetDummyPersons()
