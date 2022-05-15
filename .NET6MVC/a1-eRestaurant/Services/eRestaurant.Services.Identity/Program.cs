@@ -1,64 +1,43 @@
-using eRestaurant.Services.Identity.Common;
-using eRestaurant.Services.Identity.DbContexts;
-using eRestaurant.Services.Identity.Initializer;
-using eRestaurant.Services.Identity.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using eRestaurant.Services.Identity;
+using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
 
-// Add services to the container.
-builder.Services
-    .AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
+Log.Information("Starting up");
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
-
-builder.Services.AddIdentityServer(options =>
+try
 {
-    options.Events.RaiseErrorEvents = true;
-    options.Events.RaiseInformationEvents = true;
-    options.Events.RaiseFailureEvents = true;
-    options.Events.RaiseSuccessEvents = true;
-    options.EmitStaticAudienceClaim = true;
-})
-    .AddInMemoryIdentityResources(Constants.IdentityResources)
-    .AddInMemoryApiScopes(Constants.ApiScopes)
-    .AddInMemoryClients(Constants.Clients)
-    .AddAspNetIdentity<ApplicationUser>()
-    .AddDeveloperSigningCredential();
+    var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+    builder.Host.UseSerilog((ctx, lc) => lc
+        .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
+        .Enrich.FromLogContext()
+        .ReadFrom.Configuration(ctx.Configuration));
 
-// Resolve the services from the service provider
-builder?.Services?.BuildServiceProvider()?.GetService<IDbInitializer>()?.Initialize();
+    var app = builder
+        .ConfigureServices()
+        .ConfigurePipeline();
 
-// builder.Services.AddScoped<IProfileService, ProfileService>();
+    // this seeding is only for the template to bootstrap the DB and users.
+    // in production you will likely want a different approach.
+    if (args.Contains("/seed"))
+    {
+        Log.Information("Seeding database...");
+        SeedData.EnsureSeedData(app);
+        Log.Information("Done seeding database. Exiting.");
+        return;
+    }
 
-builder?.Services.AddControllersWithViews();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    app.Run();
 }
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseIdentityServer();
-
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.Run();
+catch (Exception ex) when (ex.GetType().Name is not "StopTheHostException") // https://github.com/dotnet/runtime/issues/60600
+{
+    Log.Fatal(ex, "Unhandled exception");
+}
+finally
+{
+    Log.Information("Shut down complete");
+    Log.CloseAndFlush();
+}

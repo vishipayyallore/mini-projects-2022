@@ -17,8 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eRestaurant.Services.Produc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eRestaurant.Web", "FrontEnd\eRestaurant.Web\eRestaurant.Web.csproj", "{6798818C-C896-4E29-A622-08806E08DF8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eRestaurant.Services.Identity", "Services\eRestaurant.Services.Identity\eRestaurant.Services.Identity.csproj", "{EEEDE96D-E9FF-4FFB-8834-97D38E4AD2E8}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,10 +31,6 @@ Global
 		{6798818C-C896-4E29-A622-08806E08DF8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6798818C-C896-4E29-A622-08806E08DF8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6798818C-C896-4E29-A622-08806E08DF8B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EEEDE96D-E9FF-4FFB-8834-97D38E4AD2E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEEDE96D-E9FF-4FFB-8834-97D38E4AD2E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EEEDE96D-E9FF-4FFB-8834-97D38E4AD2E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEEDE96D-E9FF-4FFB-8834-97D38E4AD2E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,7 +38,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8FEE9DAA-E8AD-4DAA-8553-8B8D3807DC19} = {CB04B3BD-7721-450D-8B66-06A85E275BDD}
 		{6798818C-C896-4E29-A622-08806E08DF8B} = {093AB908-316A-45E6-BABB-ACB457F6039B}
-		{EEEDE96D-E9FF-4FFB-8834-97D38E4AD2E8} = {CB04B3BD-7721-450D-8B66-06A85E275BDD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8C6BE9B2-EE57-4797-8711-0B67CE6237E4}
