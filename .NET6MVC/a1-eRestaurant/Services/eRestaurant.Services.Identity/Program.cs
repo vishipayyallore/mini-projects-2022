@@ -1,5 +1,6 @@
 using eRestaurant.Services.Identity.Common;
 using eRestaurant.Services.Identity.DbContexts;
+using eRestaurant.Services.Identity.Initializer;
 using eRestaurant.Services.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -7,8 +8,9 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
+builder.Services
+    .AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
@@ -27,9 +29,14 @@ builder.Services.AddIdentityServer(options =>
     .AddAspNetIdentity<ApplicationUser>()
     .AddDeveloperSigningCredential();
 
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 
+// Resolve the services from the service provider
+builder?.Services?.BuildServiceProvider()?.GetService<IDbInitializer>()?.Initialize();
 
-builder.Services.AddControllersWithViews();
+// builder.Services.AddScoped<IProfileService, ProfileService>();
+
+builder?.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
