@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace eshop_microservices.Pages.Device;
 
 public class InputModel

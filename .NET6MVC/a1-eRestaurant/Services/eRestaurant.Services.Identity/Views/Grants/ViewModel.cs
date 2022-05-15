@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace eshop_microservices.Pages.Grants;
 
 public class ViewModel

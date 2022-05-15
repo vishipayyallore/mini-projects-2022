@@ -1,6 +1,34 @@
+using eRestaurant.Services.Identity.Common;
+using eRestaurant.Services.Identity.DbContexts;
+using eRestaurant.Services.Identity.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+builder.Services.AddIdentityServer(options =>
+{
+    options.Events.RaiseErrorEvents = true;
+    options.Events.RaiseInformationEvents = true;
+    options.Events.RaiseFailureEvents = true;
+    options.Events.RaiseSuccessEvents = true;
+    options.EmitStaticAudienceClaim = true;
+})
+    .AddInMemoryIdentityResources(Constants.IdentityResources)
+    .AddInMemoryApiScopes(Constants.ApiScopes)
+    .AddInMemoryClients(Constants.Clients)
+    .AddAspNetIdentity<ApplicationUser>()
+    .AddDeveloperSigningCredential();
+
+
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -17,6 +45,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseIdentityServer();
 
 app.UseAuthorization();
 

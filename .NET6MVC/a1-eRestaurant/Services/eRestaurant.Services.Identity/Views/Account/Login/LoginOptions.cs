@@ -1,5 +1,3 @@
-using System;
-
 namespace eshop_microservices.Pages.Login;
 
 public class LoginOptions
