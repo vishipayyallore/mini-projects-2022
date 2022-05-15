@@ -28,6 +28,28 @@ namespace eRestaurant.Web.Controllers
             return View(productDtos);
         }
 
+        public async Task<IActionResult> ProductCreate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ProductCreate(ProductDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                var accessToken = string.Empty; // await HttpContext.GetTokenAsync("access_token");
+                var response = await _productsService.CreateProductAsync<ResponseDto>(model, accessToken);
+                if (response != null && response.IsSuccess)
+                {
+                    return RedirectToAction(nameof(ProductsIndex));
+                }
+            }
+
+            return View(model);
+        }
+
     }
 
 }
