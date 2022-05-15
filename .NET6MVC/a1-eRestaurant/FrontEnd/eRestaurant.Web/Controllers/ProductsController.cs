@@ -30,6 +30,8 @@ namespace eRestaurant.Web.Controllers
 
         public async Task<IActionResult> ProductCreate()
         {
+            await Task.CompletedTask;
+
             return View();
         }
 
@@ -73,6 +75,36 @@ namespace eRestaurant.Web.Controllers
                 var accessToken = string.Empty; // await HttpContext.GetTokenAsync("access_token");
                 var response = await _productsService.UpdateProductAsync<ResponseDto>(model, accessToken);
                 if (response != null && response.IsSuccess)
+                {
+                    return RedirectToAction(nameof(ProductsIndex));
+                }
+            }
+            return View(model);
+        }
+
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ProductDelete(int productId)
+        {
+            var accessToken = string.Empty; // await HttpContext.GetTokenAsync("access_token");
+            var response = await _productsService.GetProductByIdAsync<ResponseDto>(productId, accessToken);
+            if (response != null && response.IsSuccess)
+            {
+                ProductDto model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
+                return View(model);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        //[Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ProductDelete(ProductDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                var accessToken = string.Empty; // await HttpContext.GetTokenAsync("access_token");
+                var response = await _productsService.DeleteProductAsync<ResponseDto>(model.ProductId, accessToken);
+                if (response.IsSuccess)
                 {
                     return RedirectToAction(nameof(ProductsIndex));
                 }
