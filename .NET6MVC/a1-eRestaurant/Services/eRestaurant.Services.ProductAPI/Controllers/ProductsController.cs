@@ -1,5 +1,6 @@
 ﻿using eRestaurant.Services.ProductAPI.Dtos;
 using eRestaurant.Services.ProductAPI.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eRestaurant.Services.ProductAPI.Controllers
@@ -58,6 +59,7 @@ namespace eRestaurant.Services.ProductAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<object> Post([FromBody] ProductDto productDto)
         {
             try
@@ -75,6 +77,7 @@ namespace eRestaurant.Services.ProductAPI.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<object> Put([FromBody] ProductDto productDto)
         {
             try
@@ -92,6 +95,7 @@ namespace eRestaurant.Services.ProductAPI.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("{id}")]
         public async Task<object> Delete(int id)
         {
