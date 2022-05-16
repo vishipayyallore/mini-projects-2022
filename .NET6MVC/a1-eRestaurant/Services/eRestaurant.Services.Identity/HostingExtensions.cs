@@ -1,4 +1,5 @@
 using Duende.IdentityServer;
+using eRestaurant.Services.Identity.Common;
 using eRestaurant.Services.Identity.Data;
 using eRestaurant.Services.Identity.Models;
 using Microsoft.AspNetCore.Identity;
@@ -13,8 +14,9 @@ namespace eRestaurant.Services.Identity
         {
             builder.Services.AddRazorPages();
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services
+                .AddDbContext<ApplicationDbContext>(options =>
+                    options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -31,10 +33,11 @@ namespace eRestaurant.Services.Identity
                     // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
                     options.EmitStaticAudienceClaim = true;
                 })
-                .AddInMemoryIdentityResources(Config.IdentityResources)
-                .AddInMemoryApiScopes(Config.ApiScopes)
-                .AddInMemoryClients(Config.Clients)
-                .AddAspNetIdentity<ApplicationUser>();
+                    .AddInMemoryIdentityResources(Constants.IdentityResources)
+                    .AddInMemoryApiScopes(Constants.ApiScopes)
+                    .AddInMemoryClients(Constants.Clients)
+                    .AddAspNetIdentity<ApplicationUser>()
+                    .AddDeveloperSigningCredential();
 
             builder.Services.AddAuthentication()
                 .AddGoogle(options =>
