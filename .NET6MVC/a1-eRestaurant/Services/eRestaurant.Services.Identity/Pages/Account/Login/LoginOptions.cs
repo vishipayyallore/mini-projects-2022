@@ -1,5 +1,3 @@
-using System;
-
 namespace eRestaurant.Services.Identity.Pages.Login
 {
     public class LoginOptions

@@ -1,9 +1,6 @@
 using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Hosting;
-using System.Threading.Tasks;
 
 namespace eRestaurant.Services.Identity.Pages.Error
 {

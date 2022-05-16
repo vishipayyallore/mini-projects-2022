@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace eRestaurant.Services.Identity.Pages.Grants
 {
     public class ViewModel

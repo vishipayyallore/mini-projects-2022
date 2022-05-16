@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace eRestaurant.Services.Identity.Pages.Device
 {
     public class ViewModel
