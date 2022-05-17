@@ -33,6 +33,8 @@ namespace eRestaurant.Services.Identity
                     UserName = "alice",
                     Email = "AliceSmith@email.com",
                     EmailConfirmed = true,
+                    FirstName = "Alice",
+                    LastName = "Smith"
                 };
                 var result = _userManager.CreateAsync(alice, "Pass123$").Result;
                 _userManager.AddToRoleAsync(alice, Constants.Customer).GetAwaiter().GetResult();
@@ -65,7 +67,10 @@ namespace eRestaurant.Services.Identity
                 {
                     UserName = "bob",
                     Email = "BobSmith@email.com",
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    FirstName = "Bob",
+                    LastName = "Smith"
+
                 };
                 var result = _userManager.CreateAsync(bob, "Pass123$").Result;
                 _userManager.AddToRoleAsync(alice, Constants.Customer).GetAwaiter().GetResult();
