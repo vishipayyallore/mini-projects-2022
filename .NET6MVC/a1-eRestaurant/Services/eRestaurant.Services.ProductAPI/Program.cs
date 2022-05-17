@@ -21,16 +21,16 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddControllers();
 
 builder.Services.AddAuthentication("Bearer")
-                .AddJwtBearer("Bearer", options =>
-                {
+    .AddJwtBearer("Bearer", options =>
+    {
 
-                    options.Authority = "https://localhost:7037/";
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateAudience = false
-                    };
+        options.Authority = "https://localhost:7037/";
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateAudience = false
+        };
 
-                });
+    });
 
 builder.Services.AddAuthorization(options =>
 {
@@ -49,7 +49,7 @@ builder.Services.AddSwaggerGen(c =>
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = @"Enter 'Bearer' [space] and your token",
+        Description = @"Enter 'Bearer' [space] YourToken",
         Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
@@ -72,7 +72,6 @@ builder.Services.AddSwaggerGen(c =>
                 },
                 new List<string>()
             }
-
         });
 
 });

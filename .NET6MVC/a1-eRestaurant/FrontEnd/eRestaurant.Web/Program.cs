@@ -28,7 +28,7 @@ builder.Services.AddAuthentication(options =>
         options.Authority = builder.Configuration["ServiceUrls:IdentityAPI"];
         options.GetClaimsFromUserInfoEndpoint = true;
         options.ClientId = "a1eResturant";
-        options.ClientSecret = "secret";
+        options.ClientSecret = "secret";    // TODO: Move this to Configuration
         options.ResponseType = "code";
         options.ClaimActions.MapJsonKey("role", "role", "role");
         options.ClaimActions.MapJsonKey("sub", "sub", "sub");
