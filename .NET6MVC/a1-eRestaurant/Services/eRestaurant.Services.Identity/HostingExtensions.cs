@@ -1,7 +1,9 @@
 using Duende.IdentityServer;
+using Duende.IdentityServer.Services;
 using eRestaurant.Services.Identity.Common;
 using eRestaurant.Services.Identity.Data;
 using eRestaurant.Services.Identity.Models;
+using eRestaurant.Services.Identity.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -38,6 +40,8 @@ namespace eRestaurant.Services.Identity
                     .AddInMemoryClients(Constants.Clients)
                     .AddAspNetIdentity<ApplicationUser>()
                     .AddDeveloperSigningCredential();
+
+            builder.Services.AddScoped<IProfileService, ProfileService>();
 
             builder.Services.AddAuthentication()
                 .AddGoogle(options =>

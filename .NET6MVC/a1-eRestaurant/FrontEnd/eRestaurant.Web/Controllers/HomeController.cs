@@ -1,4 +1,5 @@
 ﻿using eRestaurant.Web.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -34,6 +35,9 @@ namespace eRestaurant.Web.Controllers
         public async Task<IActionResult> Login()
         {
             await Task.CompletedTask;
+
+            // Just to verification ;)
+            var token = await HttpContext.GetTokenAsync("access_token");
 
             return RedirectToAction(nameof(Index));
         }
