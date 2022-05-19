@@ -15,86 +15,81 @@ namespace eRestaurant.Services.Identity
         {
             using var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
             var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
+
             context?.Database.Migrate();
 
+            CreateRequiredRoles(scope);
+
+            const string PASSWORD = "Pass123$";
+
+            ApplicationUser? alice = new()
+            {
+                UserName = "alice",
+                Email = "AliceSmith@email.com",
+                EmailConfirmed = true,
+                FirstName = "Alice",
+                LastName = "Smith",
+                PhoneNumber = "111111111111",
+            };
+
+            CreateApplicationUser(scope, alice, PASSWORD, Constants.Customer);
+
+            ApplicationUser? bob = new()
+            {
+                UserName = "bob",
+                Email = "BobSmith@email.com",
+                EmailConfirmed = true,
+                FirstName = "Bob",
+                LastName = "Smith",
+                PhoneNumber = "2222222222",
+            };
+
+            CreateApplicationUser(scope, bob, PASSWORD, Constants.Admin);
+        }
+
+        private static void CreateApplicationUser(IServiceScope scope, ApplicationUser? applicationUser, string password = "Pass123$",
+            string userRole = Constants.Customer)
+        {
+            UserManager<ApplicationUser> _userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+            if (_userManager.FindByNameAsync(applicationUser?.UserName).Result == null)
+            {
+                var result = _userManager.CreateAsync(applicationUser, password).Result;
+                _userManager.AddToRoleAsync(applicationUser, Constants.Customer).GetAwaiter().GetResult();
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception(result.Errors.First().Description);
+                }
+
+                result = _userManager.AddClaimsAsync(applicationUser, new Claim[]
+                        {
+                            new Claim(JwtClaimTypes.Name, $"{applicationUser.FirstName} {applicationUser.LastName}"),
+                            new Claim(JwtClaimTypes.GivenName,applicationUser.FirstName),
+                            new Claim(JwtClaimTypes.FamilyName,applicationUser.LastName),
+                            new Claim(JwtClaimTypes.Role, userRole),
+                        }).Result;
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception(result.Errors.First().Description);
+                }
+
+                Log.Debug($"{applicationUser?.UserName} created");
+            }
+            else
+            {
+                Log.Debug($"{applicationUser?.UserName} already exists");
+            }
+        }
+
+        private static void CreateRequiredRoles(IServiceScope scope)
+        {
             var _roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             if (_roleManager.FindByNameAsync(Constants.Admin).Result == null)
             {
                 _roleManager.CreateAsync(new IdentityRole(Constants.Admin)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(Constants.Customer)).GetAwaiter().GetResult();
-            }
-
-            var _userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            var alice = _userManager.FindByNameAsync("alice").Result;
-            if (alice == null)
-            {
-                alice = new ApplicationUser
-                {
-                    UserName = "alice",
-                    Email = "AliceSmith@email.com",
-                    EmailConfirmed = true,
-                    FirstName = "Alice",
-                    LastName = "Smith"
-                };
-                var result = _userManager.CreateAsync(alice, "Pass123$").Result;
-                _userManager.AddToRoleAsync(alice, Constants.Customer).GetAwaiter().GetResult();
-                if (!result.Succeeded)
-                {
-                    throw new Exception(result.Errors.First().Description);
-                }
-
-                result = _userManager.AddClaimsAsync(alice, new Claim[]{
-                            new Claim(JwtClaimTypes.Name, "Alice Smith"),
-                            new Claim(JwtClaimTypes.GivenName, "Alice"),
-                            new Claim(JwtClaimTypes.FamilyName, "Smith"),
-                            new Claim(JwtClaimTypes.WebSite, "http://alice.com"),
-                        }).Result;
-                if (!result.Succeeded)
-                {
-                    throw new Exception(result.Errors.First().Description);
-                }
-                Log.Debug("alice created");
-            }
-            else
-            {
-                Log.Debug("alice already exists");
-            }
-
-            var bob = _userManager.FindByNameAsync("bob").Result;
-            if (bob == null)
-            {
-                bob = new ApplicationUser
-                {
-                    UserName = "bob",
-                    Email = "BobSmith@email.com",
-                    EmailConfirmed = true,
-                    FirstName = "Bob",
-                    LastName = "Smith"
-
-                };
-                var result = _userManager.CreateAsync(bob, "Pass123$").Result;
-                _userManager.AddToRoleAsync(alice, Constants.Customer).GetAwaiter().GetResult();
-                if (!result.Succeeded)
-                {
-                    throw new Exception(result.Errors.First().Description);
-                }
-
-                result = _userManager.AddClaimsAsync(bob, new Claim[]{
-                            new Claim(JwtClaimTypes.Name, "Bob Smith"),
-                            new Claim(JwtClaimTypes.GivenName, "Bob"),
-                            new Claim(JwtClaimTypes.FamilyName, "Smith"),
-                            new Claim(JwtClaimTypes.WebSite, "http://bob.com"),
-                            new Claim("location", "somewhere")
-                        }).Result;
-                if (!result.Succeeded)
-                {
-                    throw new Exception(result.Errors.First().Description);
-                }
-                Log.Debug("bob created");
-            }
-            else
-            {
-                Log.Debug("bob already exists");
             }
         }
     }
