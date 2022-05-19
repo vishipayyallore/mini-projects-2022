@@ -55,7 +55,7 @@ namespace eRestaurant.Services.Identity
             if (_userManager.FindByNameAsync(applicationUser?.UserName).Result == null)
             {
                 var result = _userManager.CreateAsync(applicationUser, password).Result;
-                _userManager.AddToRoleAsync(applicationUser, Constants.Customer).GetAwaiter().GetResult();
+                _userManager.AddToRoleAsync(applicationUser, userRole).GetAwaiter().GetResult();
 
                 if (!result.Succeeded)
                 {

@@ -12,7 +12,7 @@ namespace eRestaurant.Services.ProductAPI.Controllers
     {
 
         protected ResponseDto _response;
-        private IProductRepository _productRepository;
+        private readonly IProductRepository _productRepository;
 
         public ProductsController(IProductRepository productRepository)
         {
@@ -33,8 +33,7 @@ namespace eRestaurant.Services.ProductAPI.Controllers
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages
-                     = new List<string>() { ex.ToString() };
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
             }
 
             return _response;
@@ -52,14 +51,14 @@ namespace eRestaurant.Services.ProductAPI.Controllers
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages
-                     = new List<string>() { ex.ToString() };
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
             }
+
             return _response;
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<object> Post([FromBody] ProductDto productDto)
         {
             try
@@ -70,14 +69,14 @@ namespace eRestaurant.Services.ProductAPI.Controllers
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages
-                     = new List<string>() { ex.ToString() };
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
             }
+
             return _response;
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<object> Put([FromBody] ProductDto productDto)
         {
             try
@@ -88,9 +87,9 @@ namespace eRestaurant.Services.ProductAPI.Controllers
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages
-                     = new List<string>() { ex.ToString() };
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
             }
+
             return _response;
         }
 
@@ -107,9 +106,9 @@ namespace eRestaurant.Services.ProductAPI.Controllers
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages
-                     = new List<string>() { ex.ToString() };
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
             }
+
             return _response;
         }
 

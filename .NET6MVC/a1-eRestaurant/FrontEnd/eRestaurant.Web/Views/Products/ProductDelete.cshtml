@@ -1,4 +1,8 @@
-﻿@model eRestaurant.Web.Models.ProductDto
+﻿@{
+    ViewData["Title"] = "Products";
+}
+
+@model eRestaurant.Web.Models.ProductDto
 
 <form asp-action="ProductDelete">
     <input asp-for="ProductId" hidden />
