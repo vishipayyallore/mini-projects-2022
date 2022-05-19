@@ -124,6 +124,13 @@ namespace eRestaurant.Web.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        [Route("/Account/AccessDenied")]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
     }
 
 }
