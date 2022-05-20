@@ -19,10 +19,20 @@ body {
     margin-bottom: 60px;
 }
 
-top-navbar-overrides {
+.top-navbar-overrides {
     background-color: #084298 !important;
+}
+
+.navy-border {
+    background-color: navy!important;
 }
 
 .product-title {
     color: navy;
+}
+
+.footer-overrides {
+    background-color: navy;
+    white-space: nowrap;
+    line-height: 40px!important; /* Vertically center the text there */
 }
