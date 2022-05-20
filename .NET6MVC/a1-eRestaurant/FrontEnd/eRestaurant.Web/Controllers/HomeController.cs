@@ -23,7 +23,7 @@ namespace eRestaurant.Web.Controllers
         {
             List<ProductDto> list = new();
             var response = await _productService.GetAllProductsAsync<ResponseDto>("");
-            
+
             if (response != null && response.IsSuccess)
             {
                 list = JsonConvert.DeserializeObject<List<ProductDto>>(Convert.ToString(response.Result));

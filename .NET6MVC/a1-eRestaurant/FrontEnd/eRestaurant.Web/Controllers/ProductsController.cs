@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 
 namespace eRestaurant.Web.Controllers
 {
+
     public class ProductsController : Controller
     {
 
@@ -124,12 +125,12 @@ namespace eRestaurant.Web.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        [Route("/Account/AccessDenied")]
-        public IActionResult AccessDenied()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //[Route("/Account/AccessDenied")]
+        //public IActionResult AccessDenied()
+        //{
+        //    return View();
+        //}
 
     }
 

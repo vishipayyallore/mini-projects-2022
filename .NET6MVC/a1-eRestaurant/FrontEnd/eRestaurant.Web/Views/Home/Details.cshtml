@@ -1,4 +1,8 @@
-﻿@model eRestaurant.Web.Models.ProductDto
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model eRestaurant.Web.Models.ProductDto
 
 <form method="post">
     <input asp-for="ProductId" hidden />
@@ -50,6 +54,6 @@
     </div>
 </form>
 
-@section Scripts{ 
+@section Scripts{
     <partial name="_ValidationScriptsPartial" />
 }
