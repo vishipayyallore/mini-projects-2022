@@ -25,7 +25,7 @@ namespace eRestaurant.Services.Identity
             ApplicationUser? alice = new()
             {
                 UserName = "alice",
-                Email = "AliceSmith@email.com",
+                Email = "AliceSmith@mailinator.com",
                 EmailConfirmed = true,
                 FirstName = "Alice",
                 LastName = "Smith",
@@ -37,7 +37,7 @@ namespace eRestaurant.Services.Identity
             ApplicationUser? bob = new()
             {
                 UserName = "bob",
-                Email = "BobSmith@email.com",
+                Email = "BobSmith@mailinator.com",
                 EmailConfirmed = true,
                 FirstName = "Bob",
                 LastName = "Smith",
@@ -45,6 +45,30 @@ namespace eRestaurant.Services.Identity
             };
 
             CreateApplicationUser(scope, bob, PASSWORD, Constants.Admin);
+
+            ApplicationUser? robbie = new()
+            {
+                UserName = "robbie",
+                Email = "RobertCollins@mailinator.com",
+                EmailConfirmed = true,
+                FirstName = "Robert",
+                LastName = "Collins",
+                PhoneNumber = "2222222222",
+            };
+
+            CreateApplicationUser(scope, robbie, PASSWORD, Constants.Admin);
+
+            ApplicationUser? swamy = new()
+            {
+                UserName = "swamy",
+                Email = "SwamyPKV@mailinator.com",
+                EmailConfirmed = true,
+                FirstName = "Swamy",
+                LastName = "PKV",
+                PhoneNumber = "2222222222",
+            };
+
+            CreateApplicationUser(scope, swamy, PASSWORD, Constants.Admin);
         }
 
         private static void CreateApplicationUser(IServiceScope scope, ApplicationUser? applicationUser, string password = "Pass123$",
