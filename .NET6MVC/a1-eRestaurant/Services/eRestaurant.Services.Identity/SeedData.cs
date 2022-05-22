@@ -116,5 +116,20 @@ namespace eRestaurant.Services.Identity
                 _roleManager.CreateAsync(new IdentityRole(Constants.Customer)).GetAwaiter().GetResult();
             }
         }
+    
+        private static ApplicationUser GetApplicationUser(string userName, string email, string firstName, 
+            string lastName, string phoneNumber)
+        {
+            return new()
+            {
+                UserName = userName,
+                Email = email,
+                EmailConfirmed = true,
+                FirstName = firstName,
+                LastName = lastName,
+                PhoneNumber = phoneNumber,
+            };
+        }
+
     }
 }
