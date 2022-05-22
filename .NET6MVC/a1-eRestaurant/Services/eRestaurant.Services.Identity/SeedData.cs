@@ -13,6 +13,8 @@ namespace eRestaurant.Services.Identity
     {
         public static void EnsureSeedData(WebApplication app)
         {
+            const string PASSWORD = "Pass123$";
+
             using var scope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
             var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
 
@@ -20,54 +22,16 @@ namespace eRestaurant.Services.Identity
 
             CreateRequiredRoles(scope);
 
-            const string PASSWORD = "Pass123$";
-
-            ApplicationUser? alice = new()
-            {
-                UserName = "alice",
-                Email = "AliceSmith@mailinator.com",
-                EmailConfirmed = true,
-                FirstName = "Alice",
-                LastName = "Smith",
-                PhoneNumber = "111111111111",
-            };
-
+            ApplicationUser? alice = GetApplicationUser("alice", "AliceSmith@mailinator.com", "Alice", "Smith", "111111111111");
             CreateApplicationUser(scope, alice, PASSWORD, Constants.Customer);
 
-            ApplicationUser? bob = new()
-            {
-                UserName = "bob",
-                Email = "BobSmith@mailinator.com",
-                EmailConfirmed = true,
-                FirstName = "Bob",
-                LastName = "Smith",
-                PhoneNumber = "2222222222",
-            };
-
+            ApplicationUser? bob = GetApplicationUser("bob", "BobSmith@mailinator.com", "Bob", "Smith", "2222222222");
             CreateApplicationUser(scope, bob, PASSWORD, Constants.Admin);
 
-            ApplicationUser? robbie = new()
-            {
-                UserName = "robbie",
-                Email = "RobertCollins@mailinator.com",
-                EmailConfirmed = true,
-                FirstName = "Robert",
-                LastName = "Collins",
-                PhoneNumber = "2222222222",
-            };
-
+            ApplicationUser? robbie = GetApplicationUser("robbie", "RobertCollins@mailinator.com", "Robert", "Collins", "3333333333");
             CreateApplicationUser(scope, robbie, PASSWORD, Constants.Admin);
 
-            ApplicationUser? swamy = new()
-            {
-                UserName = "swamy",
-                Email = "SwamyPKV@mailinator.com",
-                EmailConfirmed = true,
-                FirstName = "Swamy",
-                LastName = "PKV",
-                PhoneNumber = "2222222222",
-            };
-
+            ApplicationUser? swamy = GetApplicationUser("swamy", "SwamyPKV@mailinator.com", "Swamy", "PKV", "4444444444");
             CreateApplicationUser(scope, swamy, PASSWORD, Constants.Admin);
         }
 
@@ -116,8 +80,8 @@ namespace eRestaurant.Services.Identity
                 _roleManager.CreateAsync(new IdentityRole(Constants.Customer)).GetAwaiter().GetResult();
             }
         }
-    
-        private static ApplicationUser GetApplicationUser(string userName, string email, string firstName, 
+
+        private static ApplicationUser GetApplicationUser(string userName, string email, string firstName,
             string lastName, string phoneNumber)
         {
             return new()
