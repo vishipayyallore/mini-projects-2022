@@ -18,7 +18,7 @@ namespace eRestaurant.Services.Identity
 
             builder.Services
                 .AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection")));
+                    options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityAPIDataStore")));
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
