@@ -112,20 +112,22 @@ namespace eRestaurant.Services.Identity.Pages.Login
                         return Redirect(Input.ReturnUrl);
                     }
 
+                    return Redirect(Input.ReturnUrl);
+
                     // request for a local page
-                    if (Url.IsLocalUrl(Input.ReturnUrl))
-                    {
-                        return Redirect(Input.ReturnUrl);
-                    }
-                    else if (string.IsNullOrEmpty(Input.ReturnUrl))
-                    {
-                        return Redirect("~/");
-                    }
-                    else
-                    {
-                        // user might have clicked on a malicious link - should be logged
-                        throw new Exception("invalid return URL");
-                    }
+                    //if (Url.IsLocalUrl(Input.ReturnUrl))
+                    //{
+                    //    return Redirect(Input.ReturnUrl);
+                    //}
+                    //else if (string.IsNullOrEmpty(Input.ReturnUrl))
+                    //{
+                    //    return Redirect("~/");
+                    //}
+                    //else
+                    //{
+                    //    // user might have clicked on a malicious link - should be logged
+                    //    throw new Exception("invalid return URL");
+                    //}
                 }
 
                 await _events.RaiseAsync(new UserLoginFailureEvent(Input.Username, "invalid credentials", clientId: context?.Client.ClientId));

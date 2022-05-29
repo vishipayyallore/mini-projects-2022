@@ -352,3 +352,5 @@ MigrationBackup/
 .NET6MVC/TheBooksStore/source/BooksStore.Web/Properties/ServiceDependencies/app-books-store-basic - Web Deploy/profile.arm.json
 .NET6MVC/a1-eRestaurant/Services/eRestaurant.Services.Identity/tempkey.jwk
 .NET6MVC/a1-eRestaurant/Services/eRestaurant.Services.Identity/keys/is-signing-key-F271C154311925000E4121B18F23DDEB.json
+/.NET6MVC/a1-eRestaurant/Services/eRestaurant.Services.Identity/Properties/ServiceDependencies/app-eshop-services-identity - Web Deploy/profile.arm.json
+/.NET6MVC/a1-eRestaurant/Services/eRestaurant.Services.Identity/.config/dotnet-tools.json
