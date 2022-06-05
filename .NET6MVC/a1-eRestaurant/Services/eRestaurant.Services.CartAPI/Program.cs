@@ -1,4 +1,3 @@
-using AutoMapper;
 using eRestaurant.Services.CartAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
