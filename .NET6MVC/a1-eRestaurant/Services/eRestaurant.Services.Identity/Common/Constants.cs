@@ -37,6 +37,20 @@ namespace eRestaurant.Services.Identity.Common
                 },
                 new Client
                 {
+                    ClientId="clientui",
+                    ClientSecrets= { new Secret("secret".Sha256())},
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowedScopes={
+                    IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "a1eResturant",
+                        "api",
+                        "ui"
+                    }
+                },
+                new Client
+                {
                     ClientId="a1eResturant",
                     ClientSecrets= { new Secret("secret".Sha256())},
                     AllowedGrantTypes = GrantTypes.Code,
@@ -47,7 +61,8 @@ namespace eRestaurant.Services.Identity.Common
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
-                        "a1eResturant"
+                        "a1eResturant",
+                        "api"
                     }
                 },
             };
