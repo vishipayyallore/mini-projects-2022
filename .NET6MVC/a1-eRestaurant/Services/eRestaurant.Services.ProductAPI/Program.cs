@@ -37,7 +37,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("ApiScope", policy =>
     {
         policy.RequireAuthenticatedUser();
-        policy.RequireClaim("scope", "a1eResturant");
+        policy.RequireClaim("scope", "a1eRestaurant");
     });
 });
 

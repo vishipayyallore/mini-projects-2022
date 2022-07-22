@@ -27,14 +27,14 @@ builder.Services.AddAuthentication(options =>
     {
         options.Authority = builder.Configuration["ServiceUrls:IdentityAPI"];
         options.GetClaimsFromUserInfoEndpoint = true;
-        options.ClientId = "a1eResturant";
+        options.ClientId = "a1eRestaurant";
         options.ClientSecret = "secret";    // TODO: Move this to Configuration
         options.ResponseType = "code";
         options.ClaimActions.MapJsonKey("role", "role", "role");
         options.ClaimActions.MapJsonKey("sub", "sub", "sub");
         options.TokenValidationParameters.NameClaimType = "name";
         options.TokenValidationParameters.RoleClaimType = "role";
-        options.Scope.Add("a1eResturant");
+        options.Scope.Add("a1eRestaurant");
         options.SaveTokens = true;
 
     });
