@@ -1,0 +1,60 @@
+﻿@model IEnumerable<eRestaurant.Web.Models.PersonDto>
+
+<br />
+<br />
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-primary">List of Persons</h1>
+        </div>
+        <div class="col text-end pt-1">
+            <a asp-action="PersonCreate" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Create New Person</a>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Gender
+                </th>
+                <th>
+                    City
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.PersonId
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Gender
+                    </td>
+                    <td>
+                        @item.City
+                    </td>
+                    <td>
+                        <a asp-action="PersonEdit" class="btn btn-success" asp-route-productId="@item.PersonId">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a asp-action="PersonDelete" class="btn btn-danger" asp-route-productId="@item.PersonId">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

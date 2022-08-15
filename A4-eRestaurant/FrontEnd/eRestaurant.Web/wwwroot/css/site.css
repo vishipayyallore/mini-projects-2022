@@ -1,0 +1,38 @@
+html {
+    font-size: 34px;
+    color: orangered;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.top-navbar-overrides {
+    background-color: #084298 !important;
+}
+
+.navy-border {
+    background-color: navy!important;
+}
+
+.product-title {
+    color: navy;
+}
+
+.footer-overrides {
+    background-color: navy;
+    white-space: nowrap;
+    line-height: 40px!important; /* Vertically center the text there */
+}
