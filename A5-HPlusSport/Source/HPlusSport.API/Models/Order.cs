@@ -5,7 +5,7 @@ namespace HPlusSport.API.Models
 
     public class Order
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public DateTime OrderDate { get; set; }
 
