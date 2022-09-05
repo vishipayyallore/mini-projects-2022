@@ -1,4 +1,6 @@
 ﻿using HPlusSport.API.DataStore;
+using HPlusSport.API.Models;
+using HPlusSport.API.QueryHelper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,9 +21,15 @@ namespace HPlusSport.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllProducts()
+        public async Task<IActionResult> GetAllProducts([FromQuery] QueryParameters queryParameters)
         {
-            return Ok(await _shopContext.Products.ToArrayAsync());
+            IQueryable<Product> products = _shopContext.Products;
+
+            products = products
+                .Skip(queryParameters.Size * (queryParameters.Page - 1))
+                .Take(queryParameters.Size);
+
+            return Ok(await products.ToArrayAsync());
         }
 
         [HttpGet("{id}")]
@@ -33,6 +41,7 @@ namespace HPlusSport.API.Controllers
             {
                 return NotFound();
             }
+
             return Ok(product);
         }
 
