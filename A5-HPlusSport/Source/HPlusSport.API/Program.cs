@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<ShopContext>(options =>
+builder.Services.AddDbContext<ShopDbContext>(options =>
                 options.UseInMemoryDatabase("Shop"));
 
 builder.Services.AddControllers();

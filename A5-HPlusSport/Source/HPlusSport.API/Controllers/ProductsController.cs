@@ -11,13 +11,13 @@ namespace HPlusSport.API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly ShopContext _shopContext;
+        private readonly ShopDbContext? _shopContext;
 
-        public ProductsController(ShopContext context)
+        public ProductsController(ShopDbContext context)
         {
             _shopContext = context ?? throw new ArgumentNullException(nameof(context));
 
-            _shopContext.Database.EnsureCreated();
+            _shopContext?.Database?.EnsureCreated();
         }
 
         [HttpGet]
