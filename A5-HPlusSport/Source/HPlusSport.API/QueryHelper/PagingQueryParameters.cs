@@ -1,7 +1,7 @@
 ﻿namespace HPlusSport.API.QueryHelper
 {
 
-    public class QueryParameters
+    public class PagingQueryParameters
     {
         public int Page { get; set; }
 

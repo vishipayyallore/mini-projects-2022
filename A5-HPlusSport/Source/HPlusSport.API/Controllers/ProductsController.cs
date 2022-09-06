@@ -21,7 +21,7 @@ namespace HPlusSport.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllProducts([FromQuery] QueryParameters queryParameters)
+        public async Task<IActionResult> GetAllProducts([FromQuery] PagingQueryParameters queryParameters)
         {
             IQueryable<Product> products = _shopContext.Products;
 
