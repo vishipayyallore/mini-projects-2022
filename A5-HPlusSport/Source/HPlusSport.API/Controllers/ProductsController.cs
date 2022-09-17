@@ -1,4 +1,5 @@
 ﻿using HPlusSport.API.DataStore;
+using HPlusSport.API.Extensions;
 using HPlusSport.API.Models;
 using HPlusSport.API.QueryHelper;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +32,8 @@ namespace HPlusSport.API.Controllers
 
             products = FilterProductsByName(queryParameters, products);
 
+            products = SortProductsByField(queryParameters, products);
+
             products = FilterProductsByPageSize(queryParameters, products);
 
             return Ok(await products.ToArrayAsync());
@@ -41,6 +44,19 @@ namespace HPlusSport.API.Controllers
             products = products
                         .Skip(queryParameters.Size * (queryParameters.Page - 1))
                         .Take(queryParameters.Size);
+
+            return products;
+        }
+
+        private static IQueryable<Product> SortProductsByField(SearchQueryParameters queryParameters, IQueryable<Product> products)
+        {
+            if (!string.IsNullOrEmpty(queryParameters.SortBy))
+            {
+                if (typeof(Product).GetProperty(queryParameters.SortBy) != null)
+                {
+                    products = products.OrderByCustom(queryParameters.SortBy, queryParameters.SortOrder);
+                }
+            }
 
             return products;
         }
