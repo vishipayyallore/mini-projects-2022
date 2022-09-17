@@ -28,7 +28,7 @@ namespace HPlusSport.API.Controllers
 
             products = products.FilterProductsByPrice(queryParameters);
 
-            products = FilterProductsBySku(queryParameters, products);
+            products = products.FilterProductsBySku(queryParameters);
 
             products = FilterProductsByName(queryParameters, products);
 
@@ -71,15 +71,15 @@ namespace HPlusSport.API.Controllers
             return products;
         }
 
-        private static IQueryable<Product> FilterProductsBySku(SearchQueryParameters queryParameters, IQueryable<Product> products)
-        {
-            if (!string.IsNullOrEmpty(queryParameters.Sku))
-            {
-                products = products.Where(p => p.Sku == queryParameters.Sku);
-            }
+        //private static IQueryable<Product> FilterProductsBySku(SearchQueryParameters queryParameters, IQueryable<Product> products)
+        //{
+        //    if (!string.IsNullOrEmpty(queryParameters.Sku))
+        //    {
+        //        products = products.Where(p => p.Sku == queryParameters.Sku);
+        //    }
 
-            return products;
-        }
+        //    return products;
+        //}
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id)

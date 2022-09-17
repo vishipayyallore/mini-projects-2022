@@ -7,6 +7,7 @@ namespace HPlusSport.API.Extensions
 
     public static class IQueryableExtensions
     {
+
         public static IQueryable<TEntity> OrderByCustom<TEntity>(this IQueryable<TEntity> items, string sortBy, string sortOrder)
         {
             var type = typeof(TEntity);
@@ -34,6 +35,16 @@ namespace HPlusSport.API.Extensions
             if (queryParameters.MaxPrice != null)
             {
                 products = products.Where(p => p.Price <= queryParameters.MaxPrice.Value);
+            }
+
+            return products;
+        }
+
+        public static IQueryable<Product> FilterProductsBySku(this IQueryable<Product> products, SearchQueryParameters queryParameters)
+        {
+            if (!string.IsNullOrEmpty(queryParameters.Sku))
+            {
+                products = products.Where(p => p.Sku == queryParameters.Sku);
             }
 
             return products;
