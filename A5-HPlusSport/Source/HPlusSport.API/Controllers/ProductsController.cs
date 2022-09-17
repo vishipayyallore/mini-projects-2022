@@ -34,18 +34,9 @@ namespace HPlusSport.API.Controllers
 
             products = SortProductsByField(queryParameters, products);
 
-            products = FilterProductsByPageSize(queryParameters, products);
+            products = products.FilterProductsByPageSize(queryParameters);
 
             return Ok(await products.ToArrayAsync());
-        }
-
-        private static IQueryable<Product> FilterProductsByPageSize(SearchQueryParameters queryParameters, IQueryable<Product> products)
-        {
-            products = products
-                        .Skip(queryParameters.Size * (queryParameters.Page - 1))
-                        .Take(queryParameters.Size);
-
-            return products;
         }
 
         private static IQueryable<Product> SortProductsByField(SearchQueryParameters queryParameters, IQueryable<Product> products)
