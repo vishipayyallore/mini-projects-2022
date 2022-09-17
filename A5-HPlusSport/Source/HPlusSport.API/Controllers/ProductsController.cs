@@ -32,14 +32,12 @@ namespace HPlusSport.API.Controllers
 
             products = products.FilterProductsByName(queryParameters);
 
-            products = SortProductsByField(queryParameters, products);
+            products = products.SortProductsByField(queryParameters);
 
             products = products.FilterProductsByPageSize(queryParameters);
 
             return Ok(await products.ToArrayAsync());
         }
-
-
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id)
