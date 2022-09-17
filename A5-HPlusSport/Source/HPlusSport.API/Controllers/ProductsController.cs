@@ -26,7 +26,7 @@ namespace HPlusSport.API.Controllers
         {
             IQueryable<Product> products = _shopContext.Products;
 
-            products = FilterProductsByPrice(queryParameters, products);
+            products = products.FilterProductsByPrice(queryParameters);
 
             products = FilterProductsBySku(queryParameters, products);
 
@@ -76,21 +76,6 @@ namespace HPlusSport.API.Controllers
             if (!string.IsNullOrEmpty(queryParameters.Sku))
             {
                 products = products.Where(p => p.Sku == queryParameters.Sku);
-            }
-
-            return products;
-        }
-
-        private static IQueryable<Product> FilterProductsByPrice(SearchQueryParameters queryParameters, IQueryable<Product> products)
-        {
-            if (queryParameters.MinPrice != null)
-            {
-                products = products.Where(p => p.Price >= queryParameters.MinPrice.Value);
-            }
-
-            if (queryParameters.MaxPrice != null)
-            {
-                products = products.Where(p => p.Price <= queryParameters.MaxPrice.Value);
             }
 
             return products;
