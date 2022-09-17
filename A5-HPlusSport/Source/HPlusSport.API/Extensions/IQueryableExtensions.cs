@@ -5,6 +5,7 @@ namespace HPlusSport.API.Extensions
 
     public static class IQueryableExtensions
     {
+
         public static IQueryable<TEntity> OrderByCustom<TEntity>(this IQueryable<TEntity> items, string sortBy, string sortOrder)
         {
             var type = typeof(TEntity);

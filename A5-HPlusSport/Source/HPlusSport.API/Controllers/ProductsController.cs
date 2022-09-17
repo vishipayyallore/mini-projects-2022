@@ -26,26 +26,17 @@ namespace HPlusSport.API.Controllers
         {
             IQueryable<Product> products = _shopContext.Products;
 
-            products = FilterProductsByPrice(queryParameters, products);
+            products = products.FilterProductsByPrice(queryParameters);
 
-            products = FilterProductsBySku(queryParameters, products);
+            products = products.FilterProductsBySku(queryParameters);
 
-            products = FilterProductsByName(queryParameters, products);
+            products = products.FilterProductsByName(queryParameters);
 
             products = SortProductsByField(queryParameters, products);
 
-            products = FilterProductsByPageSize(queryParameters, products);
+            products = products.FilterProductsByPageSize(queryParameters);
 
             return Ok(await products.ToArrayAsync());
-        }
-
-        private static IQueryable<Product> FilterProductsByPageSize(SearchQueryParameters queryParameters, IQueryable<Product> products)
-        {
-            products = products
-                        .Skip(queryParameters.Size * (queryParameters.Page - 1))
-                        .Take(queryParameters.Size);
-
-            return products;
         }
 
         private static IQueryable<Product> SortProductsByField(SearchQueryParameters queryParameters, IQueryable<Product> products)
@@ -56,41 +47,6 @@ namespace HPlusSport.API.Controllers
                 {
                     products = products.OrderByCustom(queryParameters.SortBy, queryParameters.SortOrder);
                 }
-            }
-
-            return products;
-        }
-
-        private static IQueryable<Product> FilterProductsByName(SearchQueryParameters queryParameters, IQueryable<Product> products)
-        {
-            if (!string.IsNullOrEmpty(queryParameters.Name))
-            {
-                products = products.Where(p => p.Name.ToLower().Contains(queryParameters.Name.ToLower()));
-            }
-
-            return products;
-        }
-
-        private static IQueryable<Product> FilterProductsBySku(SearchQueryParameters queryParameters, IQueryable<Product> products)
-        {
-            if (!string.IsNullOrEmpty(queryParameters.Sku))
-            {
-                products = products.Where(p => p.Sku == queryParameters.Sku);
-            }
-
-            return products;
-        }
-
-        private static IQueryable<Product> FilterProductsByPrice(SearchQueryParameters queryParameters, IQueryable<Product> products)
-        {
-            if (queryParameters.MinPrice != null)
-            {
-                products = products.Where(p => p.Price >= queryParameters.MinPrice.Value);
-            }
-
-            if (queryParameters.MaxPrice != null)
-            {
-                products = products.Where(p => p.Price <= queryParameters.MaxPrice.Value);
             }
 
             return products;
