@@ -71,16 +71,6 @@ namespace HPlusSport.API.Controllers
             return products;
         }
 
-        //private static IQueryable<Product> FilterProductsBySku(SearchQueryParameters queryParameters, IQueryable<Product> products)
-        //{
-        //    if (!string.IsNullOrEmpty(queryParameters.Sku))
-        //    {
-        //        products = products.Where(p => p.Sku == queryParameters.Sku);
-        //    }
-
-        //    return products;
-        //}
-
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id)
         {
