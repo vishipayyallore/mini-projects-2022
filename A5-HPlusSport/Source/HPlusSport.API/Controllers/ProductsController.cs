@@ -30,7 +30,7 @@ namespace HPlusSport.API.Controllers
 
             products = products.FilterProductsBySku(queryParameters);
 
-            products = FilterProductsByName(queryParameters, products);
+            products = products.FilterProductsByName(queryParameters);
 
             products = SortProductsByField(queryParameters, products);
 
@@ -56,16 +56,6 @@ namespace HPlusSport.API.Controllers
                 {
                     products = products.OrderByCustom(queryParameters.SortBy, queryParameters.SortOrder);
                 }
-            }
-
-            return products;
-        }
-
-        private static IQueryable<Product> FilterProductsByName(SearchQueryParameters queryParameters, IQueryable<Product> products)
-        {
-            if (!string.IsNullOrEmpty(queryParameters.Name))
-            {
-                products = products.Where(p => p.Name.ToLower().Contains(queryParameters.Name.ToLower()));
             }
 
             return products;

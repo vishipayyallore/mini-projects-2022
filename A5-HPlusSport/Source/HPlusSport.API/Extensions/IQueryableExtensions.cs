@@ -50,6 +50,16 @@ namespace HPlusSport.API.Extensions
             return products;
         }
 
+        public static IQueryable<Product> FilterProductsByName(this IQueryable<Product> products, SearchQueryParameters queryParameters)
+        {
+            if (!string.IsNullOrEmpty(queryParameters.Name))
+            {
+                products = products.Where(p => p.Name.ToLower().Contains(queryParameters.Name.ToLower()));
+            }
+
+            return products;
+        }
+
     }
 
 }
