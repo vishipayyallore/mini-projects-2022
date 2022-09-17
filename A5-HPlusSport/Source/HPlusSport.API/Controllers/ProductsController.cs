@@ -39,18 +39,7 @@ namespace HPlusSport.API.Controllers
             return Ok(await products.ToArrayAsync());
         }
 
-        private static IQueryable<Product> SortProductsByField(SearchQueryParameters queryParameters, IQueryable<Product> products)
-        {
-            if (!string.IsNullOrEmpty(queryParameters.SortBy))
-            {
-                if (typeof(Product).GetProperty(queryParameters.SortBy) != null)
-                {
-                    products = products.OrderByCustom(queryParameters.SortBy, queryParameters.SortOrder);
-                }
-            }
 
-            return products;
-        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id)
