@@ -18,7 +18,7 @@ namespace HPlusSport.API.Controllers
         {
             _shopContext = context ?? throw new ArgumentNullException(nameof(context));
 
-            _shopContext?.Database?.EnsureCreated();
+            _shopContext.Database.EnsureCreated();
         }
 
         [HttpGet]
