@@ -13,11 +13,9 @@ namespace HPlusSport.API.UnitTests.DataStoreHelper
             var option = new DbContextOptionsBuilder<ShopDbContext>().UseInMemoryDatabase(databaseName: "Test_Database").Options;
 
             var context = new ShopDbContext(option);
-            if (context != null)
-            {
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
-            }
+
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
 
             return context;
         }

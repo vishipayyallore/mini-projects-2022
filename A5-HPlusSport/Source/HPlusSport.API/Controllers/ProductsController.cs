@@ -18,7 +18,7 @@ namespace HPlusSport.API.Controllers
         {
             _shopContext = context ?? throw new ArgumentNullException(nameof(context));
 
-            _shopContext?.Database?.EnsureCreated();
+            _shopContext.Database.EnsureCreated();
         }
 
         [HttpGet]
@@ -32,24 +32,11 @@ namespace HPlusSport.API.Controllers
 
             products = products.FilterProductsByName(queryParameters);
 
-            products = SortProductsByField(queryParameters, products);
+            products = products.SortProductsByField(queryParameters);
 
             products = products.FilterProductsByPageSize(queryParameters);
 
             return Ok(await products.ToArrayAsync());
-        }
-
-        private static IQueryable<Product> SortProductsByField(SearchQueryParameters queryParameters, IQueryable<Product> products)
-        {
-            if (!string.IsNullOrEmpty(queryParameters.SortBy))
-            {
-                if (typeof(Product).GetProperty(queryParameters.SortBy) != null)
-                {
-                    products = products.OrderByCustom(queryParameters.SortBy, queryParameters.SortOrder);
-                }
-            }
-
-            return products;
         }
 
         [HttpGet("{id}")]
@@ -65,6 +52,18 @@ namespace HPlusSport.API.Controllers
             return Ok(product);
         }
 
+        [HttpPost]
+        public async Task<ActionResult<Product>> PostProduct([FromBody] Product product)
+        {
+            _shopContext.Products.Add(product);
+            await _shopContext.SaveChangesAsync();
+
+            return CreatedAtAction(
+               "GetProduct",
+               new { id = product.Id },
+               product
+           );
+        }
     }
 
 }
