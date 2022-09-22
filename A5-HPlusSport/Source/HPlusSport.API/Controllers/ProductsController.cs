@@ -70,11 +70,6 @@ namespace HPlusSport.API.Controllers
                 return BadRequest();
             }
 
-            if (await FindById(id) == null)
-            {
-                return NotFound();
-            }
-
             try
             {
                 _shopContext.Entry(product).State = EntityState.Modified;
@@ -83,6 +78,12 @@ namespace HPlusSport.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
+                var searchedProduct = await FindById(id);
+                if (searchedProduct == null)
+                {
+                    return NotFound();
+                }
+
                 throw;
             }
 
