@@ -89,6 +89,22 @@ namespace HPlusSport.API.Controllers
             return NoContent();
         }
 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Product>> DeleteProduct(int id)
+        {
+            var product = await FindById(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            _shopContext.Products.Remove(product);
+
+            await _shopContext.SaveChangesAsync();
+
+            return product;
+        }
+
         private async Task<Product?> FindById(int id)
         {
             return await _shopContext.Products.FindAsync(id);
