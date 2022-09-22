@@ -42,7 +42,7 @@ namespace HPlusSport.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id)
         {
-            var product = await _shopContext.Products.FindAsync(id);
+            var product = await FindById(id);
 
             if (product == null)
             {
@@ -56,14 +56,60 @@ namespace HPlusSport.API.Controllers
         public async Task<ActionResult<Product>> PostProduct([FromBody] Product product)
         {
             _shopContext.Products.Add(product);
+
             await _shopContext.SaveChangesAsync();
 
-            return CreatedAtAction(
-               "GetProduct",
-               new { id = product.Id },
-               product
-           );
+            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutProduct([FromRoute] int id, [FromBody] Product product)
+        {
+            if (id != product.Id)
+            {
+                return BadRequest();
+            }
+
+            if (await FindById(id) == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                _shopContext.Entry(product).State = EntityState.Modified;
+
+                await _shopContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Product>> DeleteProduct(int id)
+        {
+            var product = await FindById(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            _shopContext.Products.Remove(product);
+
+            await _shopContext.SaveChangesAsync();
+
+            return product;
+        }
+
+        private async Task<Product?> FindById(int id)
+        {
+            return await _shopContext.Products.FindAsync(id);
+        }
+
     }
 
 }
