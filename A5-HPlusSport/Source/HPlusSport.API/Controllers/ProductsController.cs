@@ -4,6 +4,7 @@ using HPlusSport.API.Models;
 using HPlusSport.API.QueryHelper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace HPlusSport.API.Controllers
 {
@@ -22,6 +23,7 @@ namespace HPlusSport.API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAllProducts([FromQuery] SearchQueryParameters queryParameters)
         {
             IQueryable<Product> products = _shopContext.Products;
@@ -40,7 +42,9 @@ namespace HPlusSport.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProduct(int id)
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Product>> GetProduct(int id)
         {
             var product = await FindById(id);
 
@@ -53,6 +57,7 @@ namespace HPlusSport.API.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.Created)]
         public async Task<ActionResult<Product>> PostProduct([FromBody] Product product)
         {
             _shopContext.Products.Add(product);
@@ -63,6 +68,9 @@ namespace HPlusSport.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> PutProduct([FromRoute] int id, [FromBody] Product product)
         {
             if (id != product.Id)
@@ -92,6 +100,8 @@ namespace HPlusSport.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Product>> DeleteProduct(int id)
         {
             var product = await FindById(id);
