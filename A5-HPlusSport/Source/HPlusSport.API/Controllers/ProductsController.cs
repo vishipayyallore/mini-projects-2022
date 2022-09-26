@@ -78,6 +78,7 @@ namespace HPlusSport.API.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
+                _shopContext.Entry(product).State = EntityState.Detached;
                 var searchedProduct = await FindById(id);
                 if (searchedProduct == null)
                 {
